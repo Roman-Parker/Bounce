@@ -5,11 +5,12 @@ const ctx = canvas.getContext('2d');
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
 
+//Generating random numbers to generate random balls
 function random(min, max) {
     const num = Math.floor(Math.random() * (max - min + 1)) + min;
     return num;
   }
-
+//constructor
 function Ball(x, y, velX, velY, color, size) {
     this.x = x;
     this.y = y;
@@ -18,14 +19,14 @@ function Ball(x, y, velX, velY, color, size) {
     this.color = color;
     this.size = size;
   }
-
+//Drawing the balls on the canvas
 Ball.prototype.draw = function() {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
     ctx.fill();
   }
-
+//Checking if any balls hit the sides of the canvas
 Ball.prototype.update = function() {
     if ((this.x + this.size) >= width) {
       this.velX = -(this.velX);
@@ -48,6 +49,7 @@ Ball.prototype.update = function() {
   }
   let balls = [];
 
+  //While loop generates 25 balls
   while (balls.length < 25) {
     let size = random(10,20);
     let ball = new Ball(
