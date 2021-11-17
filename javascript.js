@@ -3,7 +3,7 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
 const width = canvas.width = window.innerWidth;
-const height = canvas.height = window.innerHeight;
+const height = canvas.height = window.innerHeight-20;
 
 //Generating random numbers to generate random balls
 function random(min, max) {
@@ -65,6 +65,8 @@ Ball.prototype.update = function() {
   
     balls.push(ball);
   }
+  var isPaused = false;
+  
   function loop() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
     ctx.fillRect(0, 0, width, height);
@@ -75,8 +77,18 @@ Ball.prototype.update = function() {
       balls[i].collisionDetect();
     }
   
+    
+  }
+  function Start(){
+    if(isPaused){
+      Update();
+    }
     requestAnimationFrame(loop);
   }
+  function switchState(){
+    isPaused = !isPaused;
+  }
+  Start();
   Ball.prototype.collisionDetect = function() {
     for (let j = 0; j < balls.length; j++) {
       if (!(this === balls[j])) {
