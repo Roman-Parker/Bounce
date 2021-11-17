@@ -65,9 +65,13 @@ Ball.prototype.update = function() {
   
     balls.push(ball);
   }
-  var isPaused = false;
+  let isRunning = false;
   
   function loop() {
+    if(!isRunning){
+      return
+    }
+      
     ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
     ctx.fillRect(0, 0, width, height);
   
@@ -76,17 +80,16 @@ Ball.prototype.update = function() {
       balls[i].update();
       balls[i].collisionDetect();
     }
-  
+    requestAnimationFrame(loop);
     
   }
-  function Start(){
-    if(isPaused){
-      Update();
-    }
-    requestAnimationFrame(loop);
+  function start(){
+    isRunning = true;
+    loop()
+    
   }
-  function switchState(){
-    isPaused = !isPaused;
+  function stop(){
+    isRunning = false;
   }
   Start();
   Ball.prototype.collisionDetect = function() {
