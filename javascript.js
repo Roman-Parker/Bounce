@@ -91,7 +91,7 @@ Ball.prototype.update = function() {
   function stop(){
     isRunning = false;
   }
-  Start();
+  start();
   Ball.prototype.collisionDetect = function() {
     for (let j = 0; j < balls.length; j++) {
       if (!(this === balls[j])) {
