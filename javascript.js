@@ -51,6 +51,12 @@ Ball.prototype.update = function() {
 
   //While loop generates 25 balls
   while (balls.length < 25) {
+    createBall();
+  }
+  //bool variable to pause and start the animation
+  let isRunning = false;
+  //function to add more balls to the animation
+  function createBall(){
     let size = random(10,20);
     let ball = new Ball(
       // ball position always drawn at least one ball width
@@ -65,9 +71,8 @@ Ball.prototype.update = function() {
   
     balls.push(ball);
   }
-  let isRunning = false;
-  
   function loop() {
+    //Checks if animation is already running
     if(!isRunning){
       return
     }
